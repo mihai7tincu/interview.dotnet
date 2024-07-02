@@ -24,7 +24,6 @@
   <ItemGroup>
     <Folder Include="Business\Orders\Commands\" />
     <Folder Include="Business\Orders\Queries\" />
-    <Folder Include="Business\Pizzas\Commands\" />
   </ItemGroup>
 
 </Project>

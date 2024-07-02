@@ -1,10 +1,11 @@
 ﻿using Domain.Interview.Enums;
+using MediatR;
 
-namespace Microservice.Interview.Controllers.Pizza.Models
+namespace Domain.Interview.Business.Pizzas.Commands.Upsert
 {
-    public class UpsertPizza
+    public class UpsertPizzaCommand : IRequest<long?>
     {
-        public long? Id { get; set; }
+        public long Id { get; set; }
         public string? Name { get; set; }
         public byte CrustSize { get; set; }
         public CrustType CrustType { get; set; }

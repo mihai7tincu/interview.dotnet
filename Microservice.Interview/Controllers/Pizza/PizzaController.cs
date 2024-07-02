@@ -1,4 +1,5 @@
 ﻿using Domain.Interview;
+using Domain.Interview.Business.Pizzas.Commands.Upsert;
 using Domain.Interview.Business.Pizzas.Queries.GetAll;
 using Domain.Interview.Business.Pizzas.Queries.GetById;
 using MediatR;
@@ -35,38 +36,39 @@ namespace Microservice.Interview.Controllers.Pizza
         {
             var query = new GetPizzaByIdQuery(id);
             var result = await _mediator.Send(query, cancellationToken);
-            return result != null ? Ok(result) : NotFound();
+            return result == null ? NotFound() : Ok(result);
         }
 
         [HttpPost("create")]
         public async Task<IActionResult> Create([FromBody] UpsertPizza pizza, CancellationToken cancellationToken)
         {
-            var entity = new Domain.Interview.Data.Pizzas.Pizza
+            var command = new UpsertPizzaCommand
             {
                 Name = pizza.Name,
                 CrustSize = pizza.CrustSize,
-                CrustType = pizza.CrustType
+                CrustType = pizza.CrustType,
+                Toppings = pizza.Toppings
             };
 
-            await _dbContext.Pizzas.AddAsync(entity, cancellationToken);
-            await _dbContext.SaveChangesAsync(cancellationToken);
-
-            return Ok(entity.Id);
+            var result = await _mediator.Send(command, cancellationToken);
+            return result == null ? NotFound() : Ok(result);
         }
 
         [HttpPut("update/{id}")]
         public async Task<IActionResult> Update([FromRoute] long id, [FromBody] UpsertPizza pizza, CancellationToken cancellationToken)
         {
-            var entity = await _dbContext.Pizzas.FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
-            if (entity == null) 
-                return NotFound();
 
-            entity.Name = pizza.Name;
-            entity.CrustSize = pizza.CrustSize;
-            entity.CrustType = pizza.CrustType;
-            await _dbContext.SaveChangesAsync(cancellationToken);
+            var command = new UpsertPizzaCommand
+            {
+                Id = id,
+                Name = pizza.Name,
+                CrustSize = pizza.CrustSize,
+                CrustType = pizza.CrustType,
+                Toppings = pizza.Toppings
+            };
 
-            return Ok(entity);
+            var result = await _mediator.Send(command, cancellationToken);
+            return result == null ? NotFound() : Ok(result);
         }
 
         [HttpDelete("delete/{id}")]

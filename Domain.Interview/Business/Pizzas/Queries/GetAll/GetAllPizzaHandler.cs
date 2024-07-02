@@ -12,7 +12,7 @@ namespace Domain.Interview.Business.Pizzas.Queries.GetAll
             _dbContext = dbContext;
         }
 
-        public async Task<List<GetAllPizzaResponse>> Handle(GetAllPizzaQuery query, CancellationToken cancellationToken)
+        public async Task<List<GetAllPizzaResponse>> Handle(GetAllPizzaQuery request, CancellationToken cancellationToken)
         {
             var entities = await _dbContext.Pizzas
                 .Include(x => x.PizzaToppings)

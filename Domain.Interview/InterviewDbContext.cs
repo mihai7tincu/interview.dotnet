@@ -18,5 +18,6 @@ namespace Domain.Interview
         }
 
         public DbSet<Pizza> Pizzas { get; set; } = default!;
+        public DbSet<PizzaTopping> PizzaToppings { get; set; } = default!;
     }
 }

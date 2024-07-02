@@ -1,8 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Domain.Interview.Data.Pizzas;
-using Domain.Interview;
-using Microsoft.EntityFrameworkCore;
+﻿using Domain.Interview;
 using Microservice.Interview.Controllers.Pizza.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Microservice.Interview.Controllers.Pizza
 {

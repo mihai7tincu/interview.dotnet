@@ -12,7 +12,7 @@ namespace Domain.Interview.Data.Pizzas.Configurations
 
             builder.Property(x => x.Name).HasMaxLength(64).IsRequired();
             builder.Property(x => x.CrustSize).IsRequired();
-            builder.Property(x => x.CrustType).HasMaxLength(8).IsRequired(); ;
+            builder.Property(x => x.CrustType).IsRequired();
 
             builder.HasIndex(p => p.Name).IsUnique();
 

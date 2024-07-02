@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Domain.Interview.SqlMigrations.Migrations
 {
     [DbContext(typeof(InterviewDbContext))]
-    [Migration("20240702134009_AddToppings")]
-    partial class AddToppings
+    [Migration("20240702144145_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -36,10 +36,8 @@ namespace Domain.Interview.SqlMigrations.Migrations
                     b.Property<byte>("CrustSize")
                         .HasColumnType("tinyint");
 
-                    b.Property<string>("CrustType")
-                        .IsRequired()
-                        .HasMaxLength(8)
-                        .HasColumnType("nvarchar(8)");
+                    b.Property<int>("CrustType")
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -58,22 +56,95 @@ namespace Domain.Interview.SqlMigrations.Migrations
                         {
                             Id = 1L,
                             CrustSize = (byte)28,
-                            CrustType = "Thin",
+                            CrustType = 1,
                             Name = "Pepperoni"
                         },
                         new
                         {
                             Id = 2L,
                             CrustSize = (byte)32,
-                            CrustType = "Normal",
+                            CrustType = 2,
                             Name = "Funghi"
                         },
                         new
                         {
                             Id = 3L,
                             CrustSize = (byte)40,
-                            CrustType = "Thick",
+                            CrustType = 3,
                             Name = "Margherita"
+                        });
+                });
+
+            modelBuilder.Entity("Domain.Interview.Data.Pizzas.PizzaTopping", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<long>("PizzaId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("ToppingId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PizzaId");
+
+                    b.HasIndex("ToppingId");
+
+                    b.ToTable("PizzaTopping", "interview");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1L,
+                            PizzaId = 1L,
+                            ToppingId = 1L
+                        },
+                        new
+                        {
+                            Id = 2L,
+                            PizzaId = 1L,
+                            ToppingId = 2L
+                        },
+                        new
+                        {
+                            Id = 3L,
+                            PizzaId = 2L,
+                            ToppingId = 1L
+                        },
+                        new
+                        {
+                            Id = 4L,
+                            PizzaId = 2L,
+                            ToppingId = 2L
+                        },
+                        new
+                        {
+                            Id = 5L,
+                            PizzaId = 2L,
+                            ToppingId = 3L
+                        },
+                        new
+                        {
+                            Id = 6L,
+                            PizzaId = 3L,
+                            ToppingId = 4L
+                        },
+                        new
+                        {
+                            Id = 7L,
+                            PizzaId = 3L,
+                            ToppingId = 5L
+                        },
+                        new
+                        {
+                            Id = 8L,
+                            PizzaId = 3L,
+                            ToppingId = 6L
                         });
                 });
 
@@ -127,7 +198,42 @@ namespace Domain.Interview.SqlMigrations.Migrations
                         {
                             Id = 6L,
                             Name = "Mozzarella"
+                        },
+                        new
+                        {
+                            Id = 7L,
+                            Name = "Chorizo"
+                        },
+                        new
+                        {
+                            Id = 8L,
+                            Name = "Jalapeno"
                         });
+                });
+
+            modelBuilder.Entity("Domain.Interview.Data.Pizzas.PizzaTopping", b =>
+                {
+                    b.HasOne("Domain.Interview.Data.Pizzas.Pizza", null)
+                        .WithMany("PizzaToppings")
+                        .HasForeignKey("PizzaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Interview.Data.Toppings.Topping", null)
+                        .WithMany("PizzaToppings")
+                        .HasForeignKey("ToppingId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Domain.Interview.Data.Pizzas.Pizza", b =>
+                {
+                    b.Navigation("PizzaToppings");
+                });
+
+            modelBuilder.Entity("Domain.Interview.Data.Toppings.Topping", b =>
+                {
+                    b.Navigation("PizzaToppings");
                 });
 #pragma warning restore 612, 618
         }

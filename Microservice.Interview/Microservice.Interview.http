@@ -1,0 +1,6 @@
+@Microservice.Interview_HostAddress = http://localhost:5003
+
+GET {{Microservice.Interview_HostAddress}}/pizza/
+Accept: application/json
+
+###

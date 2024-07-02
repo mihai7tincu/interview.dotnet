@@ -1,0 +1,15 @@
+--init
+dotnet tool install --global dotnet-ef
+
+--ef add initial create
+dotnet ef migrations add InitialCreate --project Domain.Interview.SqlMigrations --startup-project Microservice.Interview --context InterviewDbContext --configuration --verbose
+
+--ef update database
+dotnet ef database update --project Domain.Interview.SqlMigrations --startup-project Microservice.Interview --context InterviewDbContext --configuration --verbose
+
+--ef undo last migration from db side
+dotnet ef database update <previous-migration-name> --project Domain.Interview.SqlMigrations --startup-project Microservice.Interview --context InterviewDbContext --configuration --verbose
+
+--ef undo last migration from snapshot
+dotnet ef migrations remove --project Domain.Interview.SqlMigrations --startup-project Microservice.Interview --context InterviewDbContext --configuration --verbose
+

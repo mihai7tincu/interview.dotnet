@@ -1,11 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Domain.Interview.Data.Pizzas.Configurations
 {
@@ -21,6 +15,8 @@ namespace Domain.Interview.Data.Pizzas.Configurations
             builder.Property(x => x.CrustType).HasMaxLength(8).IsRequired(); ;
 
             builder.HasIndex(p => p.Name).IsUnique();
+
+            builder.HasData(Seed.Data.GetPizzas());
         }
     }
 }

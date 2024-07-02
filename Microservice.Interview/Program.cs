@@ -1,8 +1,7 @@
 
 using Domain.Interview;
+using Domain.Interview.configs;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace Microservice.Interview
 {
@@ -15,7 +14,6 @@ namespace Microservice.Interview
             // Add services to the container.
 
             builder.Services.AddControllers();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
@@ -24,6 +22,8 @@ namespace Microservice.Interview
                 o.UseSqlServer(builder.Configuration.GetConnectionString("InterviewDbContext"),
                     b => b.MigrationsAssembly("Domain.Interview.SqlMigrations"));
             });
+
+            builder.Services.AddDomainServices();
 
             var app = builder.Build();
 
@@ -35,7 +35,6 @@ namespace Microservice.Interview
             }
 
             app.UseAuthorization();
-
 
             app.MapControllers();
 

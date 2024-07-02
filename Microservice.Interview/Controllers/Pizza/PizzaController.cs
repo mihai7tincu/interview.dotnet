@@ -1,4 +1,7 @@
 ﻿using Domain.Interview;
+using Domain.Interview.Business.Pizzas.Queries.GetAll;
+using Domain.Interview.Business.Pizzas.Queries.GetById;
+using MediatR;
 using Microservice.Interview.Controllers.Pizza.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -9,29 +12,30 @@ namespace Microservice.Interview.Controllers.Pizza
     {
         private readonly ILogger<PizzaController> _logger;
         private readonly InterviewDbContext _dbContext;
+        private readonly IMediator _mediator;
 
         public PizzaController(
             ILogger<PizzaController> logger,
-            InterviewDbContext dbContext)
+            InterviewDbContext dbContext,
+            IMediator mediator)
         {
             _logger = logger;
             _dbContext = dbContext;
+            _mediator = mediator;
         }
 
         [HttpGet("get-all")]
         public async Task<IActionResult> GetAll(CancellationToken cancellationToken)
         {
-            var result = await _dbContext.Pizzas
-                .ToListAsync(cancellationToken);
-
-            return Ok(result);
+            return Ok(await _mediator.Send(new GetAllPizzaQuery(), cancellationToken));
         }
 
         [HttpGet("get/{id}")]
         public async Task<IActionResult> Get([FromRoute] long id, CancellationToken cancellationToken)
         {
-            var entity = await _dbContext.Pizzas.FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
-            return entity != null ? Ok(entity) : NotFound();
+            var query = new GetPizzaByIdQuery(id);
+            var result = await _mediator.Send(query, cancellationToken);
+            return result != null ? Ok(result) : NotFound();
         }
 
         [HttpPost("create")]

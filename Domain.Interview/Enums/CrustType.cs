@@ -3,7 +3,7 @@
     public enum CrustType
     {
         Thin = 1,
-        Normal,
+        Regular,
         Thick
     }
 }

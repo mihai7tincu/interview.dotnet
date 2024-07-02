@@ -7,7 +7,7 @@ namespace Domain.Interview.Data.Pizzas.Seed
         public static IEnumerable<Pizza> GetPizzas() =>
         [
             new Pizza(1) { Name = "Pepperoni", CrustSize = 28, CrustType = CrustType.Thin },
-            new Pizza(2) { Name = "Funghi", CrustSize = 32, CrustType = CrustType.Normal },
+            new Pizza(2) { Name = "Funghi", CrustSize = 32, CrustType = CrustType.Regular },
             new Pizza(3) { Name = "Margherita", CrustSize = 40, CrustType = CrustType.Thick }
         ];
 

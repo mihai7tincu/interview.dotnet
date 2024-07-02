@@ -1,5 +1,5 @@
-﻿using Domain.Interview.Enums;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using Domain.Interview.Data.Orders;
+using Domain.Interview.Enums;
 
 namespace Domain.Interview.Data.Pizzas
 {
@@ -12,6 +12,7 @@ namespace Domain.Interview.Data.Pizzas
         public byte CrustSize { get; set; }
         public CrustType CrustType { get; set; }
 
-        public ICollection<PizzaTopping> PizzaToppings { get; set; } = new List<PizzaTopping>();
+        public virtual ICollection<PizzaTopping> PizzaToppings { get; set; } = new List<PizzaTopping>();
+        public virtual ICollection<OrderPizza> OrderPizzas { get; set; } = new List<OrderPizza>();
     }
 }

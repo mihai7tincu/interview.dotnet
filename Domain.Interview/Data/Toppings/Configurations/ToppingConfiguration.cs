@@ -12,7 +12,9 @@ namespace Domain.Interview.Data.Toppings.Configurations
 
             builder.Property(x => x.Name).HasMaxLength(32).IsRequired();
 
-            builder.HasIndex(p => p.Name).IsUnique();
+            builder.HasMany(x => x.PizzaToppings).WithOne(x => x.Topping).HasForeignKey(x => x.ToppingId);
+
+            builder.HasIndex(x => x.Name).IsUnique();
 
             builder.HasData(Seed.Data.GetToppings());
         }

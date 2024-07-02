@@ -14,7 +14,10 @@ namespace Domain.Interview.Data.Pizzas.Configurations
             builder.Property(x => x.CrustSize).IsRequired();
             builder.Property(x => x.CrustType).IsRequired();
 
-            builder.HasIndex(p => p.Name).IsUnique();
+            builder.HasMany(x => x.PizzaToppings).WithOne(x => x.Pizza).HasForeignKey(x => x.PizzaId);
+            builder.HasMany(x => x.OrderPizzas).WithOne(x => x.Pizza).HasForeignKey(x => x.PizzaId);
+
+            builder.HasIndex(x => x.Name).IsUnique();
 
             builder.HasData(Seed.Data.GetPizzas());
         }

@@ -1,4 +1,5 @@
-﻿using Domain.Interview.Data.Pizzas;
+﻿using AutoMapper;
+using Domain.Interview.Data.Pizzas;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,10 +8,14 @@ namespace Domain.Interview.Business.Pizzas.Commands.Upsert
     public class UpsertPizzaHandler : IRequestHandler<UpsertPizzaCommand, long?>
     {
         private readonly InterviewDbContext _dbContext;
+        private readonly IMapper _mapper;
 
-        public UpsertPizzaHandler(InterviewDbContext dbContext)
+        public UpsertPizzaHandler(
+            InterviewDbContext dbContext,
+            IMapper mapper)
         {
             _dbContext = dbContext;
+            _mapper = mapper;
         }
 
         public async Task<long?> Handle(UpsertPizzaCommand request, CancellationToken cancellationToken)
@@ -18,12 +23,7 @@ namespace Domain.Interview.Business.Pizzas.Commands.Upsert
             if (request.Id == 0)
             {
                 //insert
-                var entity = new Pizza
-                {
-                    Name = request.Name,
-                    CrustSize = request.CrustSize,
-                    CrustType = request.CrustType
-                };
+                var entity = _mapper.Map<Pizza>(request);
 
                 entity.PizzaToppings = request.Toppings.Select(x => new PizzaTopping
                 {

@@ -1,4 +1,5 @@
-﻿using Domain.Interview.Data.Pizzas;
+﻿using Domain.Interview.Data.Orders;
+using Domain.Interview.Data.Pizzas;
 using Microsoft.EntityFrameworkCore;
 
 namespace Domain.Interview
@@ -19,5 +20,6 @@ namespace Domain.Interview
 
         public DbSet<Pizza> Pizzas { get; set; } = default!;
         public DbSet<PizzaTopping> PizzaToppings { get; set; } = default!;
+        public DbSet<Order> Orders { get; set; } = default!;
     }
 }

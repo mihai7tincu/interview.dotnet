@@ -1,4 +1,5 @@
-﻿using Domain.Interview;
+﻿using AutoMapper;
+using Domain.Interview;
 using Domain.Interview.Business.Pizzas.Commands.Upsert;
 using Domain.Interview.Business.Pizzas.Queries.GetAll;
 using Domain.Interview.Business.Pizzas.Queries.GetById;
@@ -9,20 +10,25 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Microservice.Interview.Controllers.Pizza
 {
+    [ApiController]
+    [Route("api/[controller]")]
     public class PizzaController : ControllerBase
     {
         private readonly ILogger<PizzaController> _logger;
         private readonly InterviewDbContext _dbContext;
         private readonly IMediator _mediator;
+        private readonly IMapper _mapper;
 
         public PizzaController(
             ILogger<PizzaController> logger,
             InterviewDbContext dbContext,
-            IMediator mediator)
+            IMediator mediator,
+            IMapper mapper)
         {
             _logger = logger;
             _dbContext = dbContext;
             _mediator = mediator;
+            _mapper = mapper;
         }
 
         [HttpGet("get-all")]
@@ -42,14 +48,7 @@ namespace Microservice.Interview.Controllers.Pizza
         [HttpPost("create")]
         public async Task<IActionResult> Create([FromBody] UpsertPizza pizza, CancellationToken cancellationToken)
         {
-            var command = new UpsertPizzaCommand
-            {
-                Name = pizza.Name,
-                CrustSize = pizza.CrustSize,
-                CrustType = pizza.CrustType,
-                Toppings = pizza.Toppings
-            };
-
+            var command = _mapper.Map<UpsertPizzaCommand>(pizza);
             var result = await _mediator.Send(command, cancellationToken);
             return result == null ? NotFound() : Ok(result);
         }
@@ -57,15 +56,7 @@ namespace Microservice.Interview.Controllers.Pizza
         [HttpPut("update/{id}")]
         public async Task<IActionResult> Update([FromRoute] long id, [FromBody] UpsertPizza pizza, CancellationToken cancellationToken)
         {
-
-            var command = new UpsertPizzaCommand
-            {
-                Id = id,
-                Name = pizza.Name,
-                CrustSize = pizza.CrustSize,
-                CrustType = pizza.CrustType,
-                Toppings = pizza.Toppings
-            };
+            var command = _mapper.Map<UpsertPizzaCommand>(pizza);
 
             var result = await _mediator.Send(command, cancellationToken);
             return result == null ? NotFound() : Ok(result);

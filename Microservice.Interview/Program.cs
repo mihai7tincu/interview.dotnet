@@ -24,6 +24,7 @@ namespace Microservice.Interview
             });
 
             builder.Services.AddDomainServices();
+            builder.Services.AddAutoMapper(typeof(Program));
 
             var app = builder.Build();
 

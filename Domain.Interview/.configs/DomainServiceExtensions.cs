@@ -10,8 +10,7 @@ namespace Domain.Interview.configs
         public static IServiceCollection AddDomainServices(this IServiceCollection services)
         {
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(_currentAssembly));
-
-            //todo services.AddAutoMapper(_currentAssembly);
+            services.AddAutoMapper(_currentAssembly);
 
             return services;
         }

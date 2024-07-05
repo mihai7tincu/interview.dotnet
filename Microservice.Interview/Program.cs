@@ -1,6 +1,7 @@
 
 using Domain.Interview;
 using Domain.Interview.configs;
+using MassTransit;
 using Microsoft.EntityFrameworkCore;
 
 namespace Microservice.Interview
@@ -26,6 +27,15 @@ namespace Microservice.Interview
             builder.Services.AddDomainServices();
             builder.Services.AddAutoMapper(typeof(Program));
 
+            //var config = new ConfigurationBuilder()
+            //    .AddJsonFile("appsettings.Development.json")
+            //    .Build();
+
+            builder.Services.AddMassTransit(x =>
+            {
+                x.UsingRabbitMq();
+            });
+            
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

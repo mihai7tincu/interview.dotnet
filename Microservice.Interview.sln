@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34723.18
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microservice.Interview", "Microservice.Interview\Microservice.Interview.csproj", "{344F33CD-F477-4F9E-8F21-12EB97C038E3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microservice.Interview", "Microservice.Interview\Microservice.Interview.csproj", "{344F33CD-F477-4F9E-8F21-12EB97C038E3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain.Interview", "Domain.Interview\Domain.Interview.csproj", "{9946B6FB-16CE-4D08-B844-077D9F44E1C5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain.Interview", "Domain.Interview\Domain.Interview.csproj", "{9946B6FB-16CE-4D08-B844-077D9F44E1C5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain.Interview.SqlMigrations", "Domain.Interview.SqlMigrations\Domain.Interview.SqlMigrations.csproj", "{8D8E8985-DE44-4090-A468-48C907D829DB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain.Interview.SqlMigrations", "Domain.Interview.SqlMigrations\Domain.Interview.SqlMigrations.csproj", "{8D8E8985-DE44-4090-A468-48C907D829DB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain.Interview.Contracts", "Domain.Interview.Contracts\Domain.Interview.Contracts.csproj", "{0D29EEC7-03AC-488C-B3F0-9675A75A367C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{8D8E8985-DE44-4090-A468-48C907D829DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8D8E8985-DE44-4090-A468-48C907D829DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8D8E8985-DE44-4090-A468-48C907D829DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D29EEC7-03AC-488C-B3F0-9675A75A367C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D29EEC7-03AC-488C-B3F0-9675A75A367C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D29EEC7-03AC-488C-B3F0-9675A75A367C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D29EEC7-03AC-488C-B3F0-9675A75A367C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

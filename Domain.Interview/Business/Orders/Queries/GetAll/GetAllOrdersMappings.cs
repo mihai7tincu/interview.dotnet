@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Domain.Interview.Data.Orders;
 
-namespace Domain.Interview.Business.Orders.Queries
+namespace Domain.Interview.Business.Orders.Queries.GetAll
 {
     public class GetAllOrdersMappings : Profile
     {

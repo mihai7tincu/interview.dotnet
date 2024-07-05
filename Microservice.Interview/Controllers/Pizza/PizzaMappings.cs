@@ -8,7 +8,7 @@ namespace Microservice.Interview.Controllers.Pizza
     {
         public PizzaMappings()
         {
-            CreateMap<UpsertPizza, UpsertPizzaCommand>();
+            CreateMap<UpsertPizzaModel, UpsertPizzaCommand>();
         }
     }
 }

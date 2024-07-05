@@ -2,7 +2,7 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace Domain.Interview.Business.Orders.Queries
+namespace Domain.Interview.Business.Orders.Queries.GetAll
 {
     public class GetAllOrdersHandler : IRequestHandler<GetAllOrdersQuery, List<GetAllOrdersResponse>>
     {

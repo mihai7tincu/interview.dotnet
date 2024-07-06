@@ -23,7 +23,8 @@ namespace Domain.Interview.configs.RabbitMQ
             {
                 UserName = "guest", //_configuration.Username,
                 Password = "guest", //_configuration.Password,
-                HostName = "localhost" //_configuration.HostName
+                HostName = "localhost", //_configuration.HostName
+                Port = 5672
             };
             connection.DispatchConsumersAsync = true;
             var channel = connection.CreateConnection();

@@ -13,11 +13,6 @@
 
   <ItemGroup>
     <Compile Include=".configs\DomainServiceExtensions.cs" />
-    <Compile Include=".configs\MassTransitExtensions.cs" />
-    <Compile Include=".configs\MassTransit\OrderConsumer.cs" />
-    <Compile Include=".configs\RabbitMQ\ConsumerService.cs" />
-    <Compile Include=".configs\RabbitMQ\RabbitMqConfiguration.cs" />
-    <Compile Include=".configs\RabbitMQ\RabbitMqService.cs" />
     <Compile Include=".utils\Enums\CrustType.cs" />
   </ItemGroup>
 

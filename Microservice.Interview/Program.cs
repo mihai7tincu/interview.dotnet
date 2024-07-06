@@ -1,11 +1,10 @@
 
 using Domain.Interview;
 using Domain.Interview.configs;
-using Domain.Interview.configs.MassTransit;
+using Domain.Interview.Services;
 using MassTransit;
-using Microservice.Interview.configs;
+using Microservice.Interview.configs.MassTransit;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 
 namespace Microservice.Interview
 {
@@ -34,15 +33,30 @@ namespace Microservice.Interview
                 .AddJsonFile("appsettings.Development.json")
                 .Build();
 
-            builder.Services.AddMassTransit(x =>
+            builder.Services.AddMassTransit(config =>
             {
-                x.AddConsumer<OrderConsumer>();
-                
-                x.UsingRabbitMq((r, c) =>
-                {
-                    c.Host("localhost");
+                config.SetKebabCaseEndpointNameFormatter();
+                config.SetInMemorySagaRepositoryProvider();
+
+                var assembly = typeof(OrderConsumer).Assembly;
+                config.AddConsumers(assembly);
+                config.AddSagaStateMachines(assembly);
+                config.AddSagas(assembly);
+                config.AddActivities(assembly);
+
+                config.UsingRabbitMq((context, conf) => { 
+                    conf.Host(
+                        host: "localhost",
+                        virtualHost: "/", cfg => {
+                            cfg.Username("guest");
+                            cfg.Password("guest");
+                        });
+
+                    conf.ConfigureEndpoints(context);
                 });
             });
+
+            builder.Services.AddScoped<IMassTransitBusService, MassTransitBusService>();
 
             var app = builder.Build();
 

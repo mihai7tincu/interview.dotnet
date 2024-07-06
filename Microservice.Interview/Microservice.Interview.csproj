@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include=".configs\ConfigureMassTransitExtensions.cs" />
+    <Compile Include=".configs\MassTransit\MassTransitBusService.cs" />
     <Compile Include=".configs\MassTransit\MassTransitOptions.cs" />
   </ItemGroup>
 

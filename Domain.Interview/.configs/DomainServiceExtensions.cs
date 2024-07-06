@@ -1,7 +1,4 @@
-﻿using Domain.Interview.Business.Orders.Consumers;
-using Domain.Interview.configs.MassTransit;
-using Domain.Interview.configs.RabbitMQ;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 
 namespace Domain.Interview.configs
@@ -14,10 +11,6 @@ namespace Domain.Interview.configs
         {
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(_currentAssembly));
             services.AddAutoMapper(_currentAssembly);
-
-            services.AddSingleton<IRabbitMqService, RabbitMqService>();
-            services.AddSingleton<IConsumerService, ConsumerService>();
-            services.AddHostedService<ConsumerHostedService>();
 
             return services;
         }

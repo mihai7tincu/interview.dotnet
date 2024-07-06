@@ -2,6 +2,7 @@
 using Domain.Interview.Business.Orders.Commands.Create;
 using Domain.Interview.Business.Orders.Queries.GetAll;
 using Domain.Interview.configs.RabbitMQ;
+using Domain.Interview.Contracts.Orders;
 using MassTransit;
 using MediatR;
 using Microservice.Interview.Controllers.Order.Models;
@@ -23,7 +24,6 @@ namespace Microservice.Interview.Controllers.Order
         public OrderController(
             IMediator mediator,
             IMapper mapper,
-            IBusControl busControl,
             IRabbitMqService rabbitMqService)
         {
             _mediator = mediator;
@@ -56,14 +56,16 @@ namespace Microservice.Interview.Controllers.Order
             };
             var orderJson = JsonConvert.SerializeObject(order);
 
-            using var connection = _rabbitMqService.CreateChannel();
-            using var model = connection.CreateModel();
-            var body = Encoding.UTF8.GetBytes(orderJson);
+            //using var connection = _rabbitMqService.CreateChannel();
+            //using var model = connection.CreateModel();
+            //var body = Encoding.UTF8.GetBytes(orderJson);
 
-            model.BasicPublish("orderExchange",
-                                 string.Empty,
-                                 basicProperties: null,
-                                 body: body);
+            //model.BasicPublish("orderExchange",
+            //                     string.Empty,
+            //                     basicProperties: null,
+            //                     body: body);
+
+            //await bus.Publish<OrderContract>(order);
 
             return Ok(orderJson);
         }

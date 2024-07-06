@@ -1,8 +1,11 @@
 
 using Domain.Interview;
 using Domain.Interview.configs;
+using Domain.Interview.configs.MassTransit;
 using MassTransit;
+using Microservice.Interview.configs;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace Microservice.Interview
 {
@@ -27,15 +30,20 @@ namespace Microservice.Interview
             builder.Services.AddDomainServices();
             builder.Services.AddAutoMapper(typeof(Program));
 
-            //var config = new ConfigurationBuilder()
-            //    .AddJsonFile("appsettings.Development.json")
-            //    .Build();
+            var configuration = new ConfigurationBuilder()
+                .AddJsonFile("appsettings.Development.json")
+                .Build();
 
             builder.Services.AddMassTransit(x =>
             {
-                x.UsingRabbitMq();
+                x.AddConsumer<OrderConsumer>();
+                
+                x.UsingRabbitMq((r, c) =>
+                {
+                    c.Host("localhost");
+                });
             });
-            
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

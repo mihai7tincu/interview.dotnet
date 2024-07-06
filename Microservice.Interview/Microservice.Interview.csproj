@@ -7,6 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include=".configs\ConfigureMassTransitExtensions.cs" />
+    <Compile Include=".configs\MassTransit\MassTransitOptions.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="13.0.1" />
     <PackageReference Include="MassTransit" Version="8.2.3" />
     <PackageReference Include="MassTransit.RabbitMQ" Version="8.2.3" />
@@ -40,10 +45,6 @@
     <ProjectReference Include="..\Domain.Interview.Contracts\Domain.Interview.Contracts.csproj" />
     <ProjectReference Include="..\Domain.Interview.SqlMigrations\Domain.Interview.SqlMigrations.csproj" />
     <ProjectReference Include="..\Domain.Interview\Domain.Interview.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include=".configs\" />
   </ItemGroup>
 
 </Project>

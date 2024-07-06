@@ -1,13 +1,6 @@
-﻿using RabbitMQ.Client.Events;
-using RabbitMQ.Client;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using RabbitMQ.Client;
+using RabbitMQ.Client.Events;
 using System.Text;
-using System.Threading.Tasks;
-using System.Net.Http.Json;
-using Newtonsoft.Json;
-using Domain.Interview.Contracts.Orders;
 
 namespace Domain.Interview.configs.RabbitMQ
 {
@@ -37,8 +30,8 @@ namespace Domain.Interview.configs.RabbitMQ
                 var body = ea.Body.ToArray();
                 var text = Encoding.UTF8.GetString(body);
                 Console.WriteLine(text);
-
-                await Task.CompletedTask;
+                                
+                 await Task.CompletedTask;
                 _model.BasicAck(ea.DeliveryTag, false);
             };
             _model.BasicConsume(_queueName, false, consumer);

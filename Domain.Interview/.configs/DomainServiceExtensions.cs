@@ -1,6 +1,6 @@
 ﻿using Domain.Interview.Business.Orders.Consumers;
+using Domain.Interview.configs.MassTransit;
 using Domain.Interview.configs.RabbitMQ;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 

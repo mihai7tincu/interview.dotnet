@@ -58,6 +58,15 @@ namespace Microservice.Interview
 
             builder.Services.AddScoped<IMassTransitBusService, MassTransitBusService>();
 
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy(name: "angular", policy => {
+                    policy.WithOrigins("http://localhost:4200");
+                    policy.AllowAnyHeader();
+                    policy.AllowAnyMethod();
+                });
+            });
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -70,6 +79,8 @@ namespace Microservice.Interview
             app.UseAuthorization();
 
             app.MapControllers();
+
+            app.UseCors("angular");
 
             app.Run();
         }

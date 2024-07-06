@@ -13,3 +13,5 @@ dotnet ef database update <previous-migration-name> --project Domain.Interview.S
 --ef undo last migration from snapshot
 dotnet ef migrations remove --project Domain.Interview.SqlMigrations --startup-project Microservice.Interview --context InterviewDbContext --configuration --verbose
 
+docker run --rm -it -p 15672:15672 -p 5672:5672 rabbitmq:3-management
+http://localhost:15672

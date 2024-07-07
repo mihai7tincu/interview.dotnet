@@ -21,5 +21,6 @@ namespace Domain.Interview
         public DbSet<Pizza> Pizzas { get; set; } = default!;
         public DbSet<PizzaTopping> PizzaToppings { get; set; } = default!;
         public DbSet<Order> Orders { get; set; } = default!;
+        public DbSet<OrderPizza> OrderPizzas { get; set; } = default!;
     }
 }

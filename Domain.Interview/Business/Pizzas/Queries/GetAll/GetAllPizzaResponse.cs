@@ -2,6 +2,7 @@
 {
     public class GetAllPizzaResponse
     {
+        public long Id { get; set; }
         public string? Name { get; set; }
         public byte CrustSize { get; set; }
         public string? CrustType { get; set; }

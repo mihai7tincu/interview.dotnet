@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Domain.Interview.Business.Orders.Queries.GetStatistics;
+using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 
 namespace Domain.Interview.configs
@@ -11,6 +12,8 @@ namespace Domain.Interview.configs
         {
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(_currentAssembly));
             services.AddAutoMapper(_currentAssembly);
+
+            services.AddTransient<IOrdersStatisticsService, OrdersStatisticsService>();
 
             return services;
         }

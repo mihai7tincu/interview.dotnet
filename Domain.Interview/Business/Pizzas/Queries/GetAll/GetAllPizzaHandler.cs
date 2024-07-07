@@ -21,6 +21,7 @@ namespace Domain.Interview.Business.Pizzas.Queries.GetAll
 
             return entities.Select(x => new GetAllPizzaResponse
             {
+                Id = x.Id,
                 Name = x.Name,
                 CrustSize = x.CrustSize,
                 CrustType = x.CrustType.ToString(),

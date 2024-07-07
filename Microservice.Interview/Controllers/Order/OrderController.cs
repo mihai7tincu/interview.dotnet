@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Domain.Interview.Business.Orders.Commands.Create;
 using Domain.Interview.Business.Orders.Queries.GetAll;
+using Domain.Interview.Business.Orders.Queries.GetStatistics;
 using MediatR;
 using Microservice.Interview.configs.MassTransit;
 using Microservice.Interview.Controllers.Order.Models;
@@ -51,6 +52,12 @@ namespace Microservice.Interview.Controllers.Order
 
             await _busService.Publish(order);
             return Ok(order);
+        }
+        
+        [HttpGet("get-stats")]
+        public async Task<IActionResult> GetStats(CancellationToken cancellationToken)
+        {
+            return Ok(await _mediator.Send(new GetOrderStatisticsQuery(), cancellationToken));
         }
     }
 }
